@@ -124,8 +124,11 @@ function SignUp() {
           <Text>
             Already have an account?{" "}
             <RouterLink to="/login" className="main-link">
-              Log In
+              Log In{" "}|
             </RouterLink>
+            <RouterLink to="/" className="main-link">
+          {" "}Home
+          </RouterLink>
           </Text>
         </Container>
       </Flex>

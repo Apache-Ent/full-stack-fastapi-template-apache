@@ -106,7 +106,10 @@ function Login() {
         <Text>
           Don't have an account?{" "}
           <RouterLink to="/signup" className="main-link">
-            Sign Up
+            Sign Up{" "}|
+          </RouterLink>
+          <RouterLink to="/" className="main-link">
+          {" "}Home
           </RouterLink>
         </Text>
       </Container>
