@@ -66,16 +66,17 @@ const HeroSection: React.FC = () => {
               >
                 Sign Up
               </Button>
-              {/* <Button 
-                onClick={() => window.location.href = "/signup?role=agent"}
+              <Button 
+                //onClick={() => window.location.href = "/signup?role=agent"}
+                onClick={() => window.location.href = "/login"}
                 size="lg" 
                 variant="outline"
                 borderColor="white"
                 _hover={{ bg: "whiteAlpha.200" }}
                 fontWeight="bold"
               >
-                Sign Up as Agent
-              </Button> */}
+                Login
+              </Button>
             </HStack>
           </VStack>
           
