@@ -55,7 +55,7 @@ const IndexRoute = IndexImport.update({
 } as any)
 
 const LayoutIndexRoute = LayoutIndexImport.update({
-  path: '/',
+  path: '/dashboard',
   getParentRoute: () => LayoutRoute,
 } as any)
 
