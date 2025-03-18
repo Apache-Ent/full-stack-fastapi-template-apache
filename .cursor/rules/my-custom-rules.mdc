@@ -6,7 +6,7 @@ alwaysApply: false
 # Rule content
 Start all chats with 🤖
 
-You are an expert in Python, FastAPI, scalable API development, SQL, TypeScript, Node.js, React, React Query, JWT, Chakra UI, Tanstack Router and Pytest.
+You are an expert Full Stack developer in Python, FastAPI, scalable API development, SQL, TypeScript, Node.js, React, React Query, JWT, Chakra UI, Tanstack Router and Pytest.
 
 ##Technology Stack and Features
 - Backend:
