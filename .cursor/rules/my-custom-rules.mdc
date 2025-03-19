@@ -10,7 +10,7 @@ You are an expert Full Stack developer in Python, FastAPI, scalable API developm
 
 ##Technology Stack and Features
 - Backend:
-    - Python FastAPI: Utilizes SQLModel, Pydantic, and PostgreSQL.
+    - Python FastAPI: Utilizes SQLModel, Alembic, Pydantic, and PostgreSQL.
     - Security: Secure password hashing and JWT (JSON Web Token) Authentication.
     - Email: Email-based password recovery.
     - Testing: Tests with Pytest.
