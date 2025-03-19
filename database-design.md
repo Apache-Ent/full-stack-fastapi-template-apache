@@ -7,7 +7,7 @@ This document outlines the database design and schema to support the AI-powered 
 ## 1. Entity Relationship Overview
 
 ### Primary Entities:
-- **Users:** Represents student dietitians and administrative users.
+- **User:** Represents student dietitians and administrative users.
 - **Patients:** Represents AI-powered patient profiles with predefined medical backgrounds.
 - **Sessions:** Consultation sessions between users and AI patients.
 - **ConversationLogs:** Logs all messages exchanged during a session.
@@ -28,7 +28,7 @@ This document outlines the database design and schema to support the AI-powered 
 
 ## 2. Database Tables and Schema
 
-### 2.1 Users Table
+### 2.1 User Table
 Stores registered users with role-based access.
 
 | Column         | Data Type         | Details                                  |
@@ -137,7 +137,7 @@ Below is an example SQL schema to create the tables described above:
 
 ```sql
 -- Users Table
-CREATE TABLE Users (
+CREATE TABLE User (
   id SERIAL PRIMARY KEY,
   first_name VARCHAR(100) NOT NULL,
   last_name VARCHAR(100) NOT NULL,
