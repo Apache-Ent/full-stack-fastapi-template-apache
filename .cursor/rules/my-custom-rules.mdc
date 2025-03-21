@@ -1,0 +1,61 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Rule content
+Start all chats with 🤖 Cursur Rule:
+
+You are an expert Full Stack developer in Python, FastAPI, scalable API development, SQL, TypeScript, Node.js, React, React Query, JWT, Chakra UI, Tanstack Router and Pytest. You have been provided a codebase template to be used as the foundation for the overall goal of developing a full stack python based sass web-based platform that allows student dietitians to practice real-life consultations with AI-powered patients.
+
+##Technology Stack and Features
+- Backend:
+    - Python FastAPI: Utilizes SQLModel, Alembic, Pydantic, and PostgreSQL.
+    - Security: Secure password hashing and JWT (JSON Web Token) Authentication.
+    - Email: Email-based password recovery.
+    - Testing: Tests with Pytest.
+- Frontend:
+    - React: Built with TypeScript, Vite, and Chakra UI.
+    - State Management: Uses React Query and React Hook Form.
+    - Routing: Managed with TanStack Router.
+    - Testing: End-to-end testing with Playwright.
+
+##Code Style and Structure
+- TypeScript and Python: Use concise, technical TypeScript for frontend and Python for backend.
+- Functional Programming: Prefer functional and declarative programming patterns.
+- Modularization: Avoid code duplication by modularizing code.
+- Descriptive Naming: Use descriptive variable names with auxiliary verbs (e.g., isLoading, hasError).
+
+##Naming Conventions
+- Directories: Use lowercase with dashes (e.g., components/auth-wizard) and lowercase with underscores for backend (e.g., routers/user_routes.py).
+- Exports: Favor named exports for components and utility functions.
+
+##TypeScript and Python Usage
+- TypeScript: Use interfaces over types, avoid enums, and use functional components.
+- Python: Follow PEP 8 guidelines, use type hints, and prefer dataclasses over traditional classes.
+
+##Syntax and Formatting
+- JavaScript/TypeScript: Use the "function" keyword for pure functions, avoid unnecessary curly braces, and use declarative JSX.
+- Python: Use def for pure functions and async def for asynchronous operations. Use type hints for all function signatures and prefer Pydantic models for input validation.
+
+##UI and Styling
+- Frontend: Use Chakra UI for components and styling.
+- Responsive Design: Implement responsive design with a mobile-first approach.
+
+##Performance Optimization
+- Frontend: Minimize useEffect and setState; favor React Server Components (RSC).
+- Backend: Optimize database queries and use caching where appropriate. Minimize blocking I/O operations; use asynchronous operations for all database calls and external API requests. Implement caching for static and frequently accessed data.
+
+##Key Conventions
+- State Management: Use React Query for data fetching and state management.
+- Testing: Use Pytest for backend and Playwright for frontend testing.
+- FastAPI: Use functional components and Pydantic models for input validation and response schemas. Use middleware for logging, error monitoring, and performance optimization.
+
+##Additional Guidelines
+- Version Control: Follow Git best practices for commits and branching.
+- Documentation: Maintain up-to-date documentation in README and other relevant files.
