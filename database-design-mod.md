@@ -26,114 +26,9 @@ This document outlines the database design and schema to support the AI-powered 
 
 ---
 
-## 2. Database Tables and Schema
+## 3. SQL Schema
 
-### 2.1 User Table
-Stores registered users with role-based access.
-
-| Column         | Data Type         | Details                                  |
-|----------------|-------------------|------------------------------------------|
-| id             | SERIAL PRIMARY KEY| Unique user identifier                   |
-| first_name     | VARCHAR(100)      | User's first name                        |
-| last_name      | VARCHAR(100)      | User's last name                         |
-| email          | VARCHAR(255)      | Unique email address                     |
-| password_hash  | VARCHAR(255)      | Hashed password                          |
-| role           | VARCHAR(50)       | Role e.g., 'SuperAdmin', 'Admin', 'User'   |
-| created_at     | TIMESTAMP         | Default: CURRENT_TIMESTAMP               |
-| updated_at     | TIMESTAMP         | Default: CURRENT_TIMESTAMP               |
-
-### 2.2 Patients Table
-Holds information about AI-powered patients and their medical background.
-
-| Column         | Data Type         | Details                                  |
-|----------------|-------------------|------------------------------------------|
-| id             | SERIAL PRIMARY KEY| Unique patient identifier                |
-| name           | VARCHAR(255)      | Patient name or identifier               |
-| medical_history| TEXT              | Predefined medical background context    |
-| created_by     | INT               | Foreign key referencing Users(id)        |
-| created_at     | TIMESTAMP         | Default: CURRENT_TIMESTAMP               |
-| updated_at     | TIMESTAMP         | Default: CURRENT_TIMESTAMP               |
-
-### 2.3 Sessions Table
-Tracks consultation sessions booked by users.
-
-| Column                | Data Type         | Details                                            |
-|-----------------------|-------------------|----------------------------------------------------|
-| id                    | SERIAL PRIMARY KEY| Unique session identifier                          |
-| user_id               | INT               | Foreign key referencing Users(id)                  |
-| patient_id            | INT               | Foreign key referencing Patients(id)               |
-| status                | VARCHAR(50)       | e.g., 'scheduled', 'in_progress', 'completed', 'cancelled' |
-| scheduled_start_time  | TIMESTAMP         | Scheduled start time for the session               |
-| start_time            | TIMESTAMP         | Actual start time of the session                 |
-| end_time              | TIMESTAMP         | Session end time                                   |
-| created_at            | TIMESTAMP         | Default: CURRENT_TIMESTAMP                         |
-| updated_at            | TIMESTAMP         | Default: CURRENT_TIMESTAMP                         |
-
-### 2.4 ConversationLogs Table
-Stores the messages exchanged during each session.
-
-| Column      | Data Type         | Details                                    |
-|-------------|-------------------|--------------------------------------------|
-| id          | SERIAL PRIMARY KEY| Unique log entry identifier                |
-| session_id  | INT               | Foreign key referencing Sessions(id)       |
-| sender      | VARCHAR(50)       | Identifier for the sender ('user', 'patient', 'feedback') |
-| message     | TEXT              | The message content                        |
-| created_at  | TIMESTAMP         | Default: CURRENT_TIMESTAMP                 |
-
-### 2.5 Payments Table
-Records financial transactions for session credits via Stripe.
-
-| Column                 | Data Type         | Details                                            |
-|------------------------|-------------------|----------------------------------------------------|
-| id                     | SERIAL PRIMARY KEY| Unique payment identifier                          |
-| user_id                | INT               | Foreign key referencing Users(id)                  |
-| stripe_transaction_id  | VARCHAR(255)      | Unique transaction ID from Stripe                |
-| amount                 | DECIMAL(10,2)     | Transaction amount                                 |
-| currency               | VARCHAR(10)       | Currency code (e.g., USD)                          |
-| status                 | VARCHAR(50)       | e.g., 'pending', 'completed', 'refunded'           |
-| created_at             | TIMESTAMP         | Default: CURRENT_TIMESTAMP                         |
-
-### 2.6 CreditTransactions Table
-Maintains a record of credit purchase and usage events.
-
-| Column           | Data Type         | Details                                            |
-|------------------|-------------------|----------------------------------------------------|
-| id               | SERIAL PRIMARY KEY| Unique transaction record                          |
-| user_id          | INT               | Foreign key referencing Users(id)                  |
-| transaction_type | VARCHAR(50)       | e.g., 'purchase', 'usage', 'refund'                |
-| credits          | INT               | Number of credits added or used                    |
-| description      | TEXT              | Description or notes regarding the transaction     |
-| created_at       | TIMESTAMP         | Default: CURRENT_TIMESTAMP                         |
-
-### 2.7 SessionFeedback Table
-Holds user feedback and ratings for each consultation session.
-
-| Column          | Data Type         | Details                                     |
-|-----------------|-------------------|---------------------------------------------|
-| id              | SERIAL PRIMARY KEY| Unique feedback identifier                  |
-| session_id      | INT               | Foreign key referencing Sessions(id)        |
-| user_rating     | INT               | Numerical rating (e.g., 1 to 5) with CHECK constraint |
-| feedback_comment| TEXT              | Textual feedback/comments                   |
-| created_at      | TIMESTAMP         | Default: CURRENT_TIMESTAMP                  |
-
-### 2.8 Notifications Table
-Manages email notifications sent to users.
-
-| Column   | Data Type         | Details                                         |
-|----------|-------------------|-------------------------------------------------|
-| id       | SERIAL PRIMARY KEY| Unique notification identifier                   |
-| user_id  | INT               | Foreign key referencing Users(id)               |
-| type     | VARCHAR(50)       | Notification type e.g., 'payment_update', 'onboarding', 'session_reminder' |
-| subject  | VARCHAR(255)      | Email subject line                              |
-| message  | TEXT              | Email message content                           |
-| status   | VARCHAR(50)       | e.g., 'sent', 'pending'                         |
-| created_at | TIMESTAMP       | Default: CURRENT_TIMESTAMP                      |
-
----
-
-## 3. SQL Schema Example
-
-Below is an example SQL schema to create the tables described above:
+Below is the SQL schema to create the tables described above:
 
 ```sql
 -- Users Table
@@ -218,7 +113,7 @@ CREATE TABLE Notifications (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-
+##
 
  ┌────────────────────┐          ┌───────────────────────┐
  │     user           │          │       patients        │
