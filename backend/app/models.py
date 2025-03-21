@@ -1,10 +1,17 @@
 import uuid
 from datetime import datetime
-from enum import Enum
+from enum import Enum as PyEnum
 from typing import List, Optional
 
 from pydantic import EmailStr, Field
 from sqlmodel import Field, Relationship, SQLModel
+
+
+# Make sure to place this enum definition BEFORE any classes that use it
+class UserRole(str, PyEnum):
+    SUPER_ADMIN = "SuperAdmin"
+    ADMIN = "Admin"
+    USER = "User"
 
 
 # Shared properties
@@ -16,8 +23,15 @@ class UserBase(SQLModel):
 
 
 # Properties to receive via API on creation
-class UserCreate(UserBase):
-    password: str = Field(min_length=8, max_length=40)
+class UserCreate(SQLModel):
+    email: EmailStr
+    password: str
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None
+    full_name: Optional[str] = None
+    is_active: Optional[bool] = True
+    is_superuser: Optional[bool] = False
+    role: Optional[UserRole] = UserRole.USER
 
 
 class UserRegister(SQLModel):
@@ -27,9 +41,15 @@ class UserRegister(SQLModel):
 
 
 # Properties to receive via API on update, all are optional
-class UserUpdate(UserBase):
-    email: EmailStr | None = Field(default=None, max_length=255)  # type: ignore
-    password: str | None = Field(default=None, min_length=8, max_length=40)
+class UserUpdate(SQLModel):
+    email: Optional[EmailStr] = None
+    password: Optional[str] = None
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None
+    full_name: Optional[str] = None
+    is_active: Optional[bool] = None
+    is_superuser: Optional[bool] = None
+    role: Optional[UserRole] = None
 
 
 class UserUpdateMe(SQLModel):
@@ -44,9 +64,26 @@ class UpdatePassword(SQLModel):
 
 # Database model, database table inferred from class name
 class User(UserBase, table=True):
-    id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
-    hashed_password: str
-    items: list["Item"] = Relationship(back_populates="owner", cascade_delete=True)
+    id: uuid.UUID = Field(
+        default_factory=uuid.uuid4,
+        primary_key=True,
+        index=True,
+        nullable=False,
+    )
+    email: EmailStr = Field(max_length=255, unique=True, index=True)
+    first_name: Optional[str] = Field(max_length=100, nullable=True)
+    last_name: Optional[str] = Field(max_length=100, nullable=True)
+    full_name: Optional[str] = Field(max_length=255, nullable=True)  # Keep for backward compatibility
+    hashed_password: str = Field(max_length=255)
+    is_active: bool = True
+    is_superuser: bool = False
+    role: UserRole = Field(default=UserRole.USER)
+    credits_balance: int = Field(default=0)
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
+    
+    # Relationships
+    items: List["Item"] = Relationship(back_populates="owner", sa_relationship_kwargs={"cascade": "all, delete-orphan"})
     created_patients: List["Patient"] = Relationship(back_populates="creator", sa_relationship_kwargs={"cascade": "all, delete-orphan"})
     sessions: List["Session"] = Relationship(back_populates="user", sa_relationship_kwargs={"cascade": "all, delete-orphan"})
     payments: List["Payment"] = Relationship(back_populates="user", sa_relationship_kwargs={"cascade": "all, delete-orphan"})
@@ -123,27 +160,27 @@ class NewPassword(SQLModel):
 
 
 # New Enum classes for status fields
-class SessionStatus(str, Enum):
+class SessionStatus(str, PyEnum):
     SCHEDULED = "scheduled"
     IN_PROGRESS = "in_progress"
     COMPLETED = "completed"
     CANCELLED = "cancelled"
 
-class PaymentStatus(str, Enum):
+class PaymentStatus(str, PyEnum):
     PENDING = "pending"
     COMPLETED = "completed"
     REFUNDED = "refunded"
 
-class NotificationStatus(str, Enum):
+class NotificationStatus(str, PyEnum):
     SENT = "sent"
     PENDING = "pending"
 
-class TransactionType(str, Enum):
+class TransactionType(str, PyEnum):
     PURCHASE = "purchase"
     USAGE = "usage"
     REFUND = "refund"
 
-class MessageSender(str, Enum):
+class MessageSender(str, PyEnum):
     USER = "user"
     PATIENT = "patient"
     FEEDBACK = "feedback"
