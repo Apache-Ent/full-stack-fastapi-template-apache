@@ -83,8 +83,10 @@ The purpose of this project is to develop a web-based platform that allows stude
   - Admins can assist in managing user data without access to payment details.
 
 ### 4.3 Patient Catalog & Session Management
+- **Patient Creation:**
+  - Ability for logged in Super Users and Admin Users to create AI-powered patient profiles with their medical backgrounds. 
 - **Patient Listing:**
-  - Display all AI-powered patient profiles with their respective medical backgrounds.
+  - Ability for all logged in users to view/display all AI-powered patient profiles with their respective medical backgrounds.
   - Search and filter capabilities.
 - **Session Initiation:**
   - Ability for users to select a patient and start a consultation session.
