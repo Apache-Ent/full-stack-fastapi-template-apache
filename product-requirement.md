@@ -32,6 +32,8 @@ The purpose of this project is to develop a web-based platform that allows stude
   - **Users (Student Dietitians):** Ability to book sessions, track progress, and provide session feedback.
 
 ### 3.2 Patient Catalog and Session Booking
+- **Patient Creation:**
+  - Ability for logged in Super Users to create and view AI-powered patient profiles with their medical backgrounds on the Patients tab.
 - **Patient Catalog**
   - Display a list of available AI-powered patient profiles with detailed medical background contexts.
 - **Session Booking**
@@ -84,7 +86,7 @@ The purpose of this project is to develop a web-based platform that allows stude
 
 ### 4.3 Patient Catalog & Session Management
 - **Patient Creation:**
-  - Ability for logged in Super Users and Admin Users to create AI-powered patient profiles with their medical backgrounds. 
+  - Ability for logged in Super Users to create and view AI-powered patient profiles with their medical backgrounds on the Patients tab. 
 - **Patient Listing:**
   - Ability for all logged in users to view/display all AI-powered patient profiles with their respective medical backgrounds.
   - Search and filter capabilities.
