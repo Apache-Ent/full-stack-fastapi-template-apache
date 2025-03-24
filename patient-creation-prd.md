@@ -90,11 +90,12 @@ This feature will allow Super Users to efficiently **add new patients**, **view 
 ## 6. Technical Requirements
 
 ### 6.1 API Endpoints
-New **patients** table:
-Method	    Endpoint	    Description	            Access
-POST	    /patients	    Create new patient	    Super Users
-GET	        /patients	    Get list of patients	Super Users
-GET	        /patients/{id}	Get patient details	    Super Users
+| Method | Endpoint        | Description          | Access             |
+|---------|----------------|----------------------|--------------------|
+| POST    | /patients      | Create new patient   | Super Users        |
+| GET     | /patients      | Get list of patients | Super Users        |
+| GET     | /patients/{id} | Get patient details  | Super Users        |
+
 
 ### 6.2 Frontend Changes
 - Patients Tab: List patients.
