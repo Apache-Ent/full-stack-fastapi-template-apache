@@ -1,8 +1,9 @@
 import uuid
 from datetime import datetime
 from decimal import Decimal
+from typing import Optional
 
-from pydantic import EmailStr
+from pydantic import EmailStr, BaseModel
 from sqlmodel import Field, Relationship, SQLModel
 
 
@@ -207,3 +208,13 @@ class Notification(SQLModel, table=True):
     status: str = Field(max_length=50)  # 'sent', 'pending'
     created_at: datetime = Field(default_factory=datetime.utcnow)
     user: User = Relationship(back_populates="notifications")
+
+##OpenAI Chat API Models
+class ChatRequest(BaseModel):
+    message: str
+    #model: str = "gpt-4o"  # default model
+    #temperature: Optional[float] = 0.7
+    #max_tokens: Optional[int] = 150
+
+class ChatResponse(BaseModel):
+    response: str
