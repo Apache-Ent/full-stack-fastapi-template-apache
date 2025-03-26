@@ -22,6 +22,7 @@ async def chat_with_ai(request: ChatRequest):
         response = await client.chat.completions.create(
             model=settings.OPENAI_MODEL,
             messages=[
+                {"role": "system", "content": "You are a helpful assistant."},
                 {"role": "user", "content": request.message}
             ],
             temperature=settings.OPENAI_TEMPERATURE,
