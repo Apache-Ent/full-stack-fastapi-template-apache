@@ -126,6 +126,30 @@ class NewPassword(SQLModel):
     new_password: str = Field(min_length=8, max_length=40)
 
 
+# Patient base model for shared properties
+class PatientBase(SQLModel):
+    name: str = Field(max_length=255)
+    medical_history: str | None = None
+
+
+# Properties to receive via API on creation
+class PatientCreate(PatientBase):
+    pass
+
+
+# Properties to return via API
+class PatientPublic(PatientBase):
+    id: uuid.UUID
+    created_by_id: uuid.UUID
+    created_at: datetime
+    updated_at: datetime
+
+
+class PatientsPublic(SQLModel):
+    data: list[PatientPublic]
+    count: int
+
+
 # Patient model
 class Patient(SQLModel, table=True):
     id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
@@ -208,6 +232,13 @@ class Notification(SQLModel, table=True):
     status: str = Field(max_length=50)  # 'sent', 'pending'
     created_at: datetime = Field(default_factory=datetime.utcnow)
     user: User = Relationship(back_populates="notifications")
+
+
+# Properties to receive via API on update
+class PatientUpdate(SQLModel):
+    name: str | None = Field(default=None, max_length=255)
+    medical_history: str | None = None
+
 
 ##OpenAI Chat API Models
 class ChatRequest(BaseModel):
